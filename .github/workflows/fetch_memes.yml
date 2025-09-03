@@ -1,7 +1,7 @@
 name: Fetch JBZD Memes
 
 on:
-  workflow_dispatch: # pozwala uruchomić ręcznie w GitHub
+  workflow_dispatch:  # ręczne uruchomienie
 
 jobs:
   fetch:
@@ -22,12 +22,12 @@ jobs:
           pip install requests beautifulsoup4
 
       - name: Run fetch script
-        run: python jbzd-memes-data-1.py # zmień w repo2 i repo3 odpowiednio
+        run: python fetch_memes.py
 
       - name: Commit CSV
         run: |
           git config --local user.name "github-actions"
           git config --local user.email "github-actions@github.com"
-          git add *.csv
+          git add memes-data/*.csv
           git commit -m "Add latest memes CSV" || echo "No changes to commit"
           git push
